@@ -1,0 +1,28 @@
+#######################################
+# Syntax Coloring Map
+#######################################
+#######################################
+# # Datatypes (KEYWORD1)
+#######################################
+RT_HW_ETHERNET_EXP    KEYWORD1
+RT_HW_ETHERNET_NTP    KEYWORD1
+RT_HW_ETHERNET_SERVER KEYWORD1
+eth       KEYWORD1
+ethExp    KEYWORD1
+ethUDP    KEYWORD1
+ethNTP    KEYWORD1
+ethServer KEYWORD1
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+setParamEth KEYWORD2
+directEth KEYWORD2
+checkDirEth KEYWORD2
+printMessEth KEYWORD2
+setParamNTP KEYWORD2
+directNTP KEYWORD2
+checkDirNTP KEYWORD2
+printMessNTP KEYWORD2
+#######################################
+# Constants (LITERAL1)
+#######################################

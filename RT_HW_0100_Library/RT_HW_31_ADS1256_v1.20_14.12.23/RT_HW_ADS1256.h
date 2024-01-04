@@ -104,7 +104,6 @@ if(id.dir==210){
 id.ok=id.initOk=id.beginOk=0; id.clear=id.err=1; 
 	RT_HW_Base.consoleTest(String(F("ADS1256 DIRECT.210.1 status")),id.status, ';','U');
 	RT_HW_Base.consoleTest(String(F(" codeErr")),                   id.codeErr,'E','U');
-
 if(id.codeErr==70){																	return;}	//--Заглушка по фатальной ошибке настройки параметров;																	
 if(id.codeErr==71){id.checkDIR.pointTime=20; id.checkDIR.sizeDelay=500; id.dir=250;	return;}	//--Задержка 500 ms    по ошибке инициализации ADS1256 [begin()]; 
 if(id.codeErr==72){id.checkDIR.pointTime=20; id.checkDIR.sizeDelay= 50; id.dir=250;	return;}	//--Задержка  50 ms    по ошибке измерения канала      [channel()]; 
