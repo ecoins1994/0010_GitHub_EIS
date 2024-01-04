@@ -23,6 +23,7 @@ uint8_t  codeErr=0;				//--4.Code error;
 //-------------------------------------------------------------------------------------------------	
 uint8_t  run;					//--5.Command run; 
 uint8_t  dir=0;					//--6.Working  dir for direct();
+uint8_t  t2=0;					//-Длительность CS;
 //-------------------------------------------------------------------------------------------------
 uint8_t  fresh=1;				//--6.Updating measured data;
 //-------------------------------------------------------------------------------------------------
@@ -64,6 +65,7 @@ if(run>0){id.run=1; run=5;}
 //									1.0.Initting parameters
 //-------------------------------------------------------------------------------------------------
 if(id.dir==0) {						
+if(id.dvS.t2==0){id.dvS.t2=2;}			//--Настройка времени CS по умолчанию; 
 if(id.custom!=1) {return;}				//--Exit due to device setup error;
 id.dir=10;} 							//--Goto initDevice();
 //-------------------------------------------------------------------------------------------------
@@ -118,7 +120,11 @@ getParamDevice(id);};
 //									7.5.Read device.
 //=================================================================================================
 void xxxRead(RT_HW_74HC165_DEV &id){	
-if(id.mi=='S'){RT_HW_Base.spiRead74HC165(id.dvS,id.qnt); 	getParamDevice(id);	return;}
+if(id.mi=='S'){RT_HW_Base.spiRead74HC165(id.dvS,id.qnt); 	getParamDevice(id);	
+
+
+
+return;}
 if(id.mi=='N'){RT_HW_Base.spnRead74HC165(id.dvN,id.qnt); 	getParamDevice(id);	return;}
 getParamDevice(id);};
 //=================================================================================================
