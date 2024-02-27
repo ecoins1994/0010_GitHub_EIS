@@ -380,33 +380,33 @@ return 0;}
 //									7.1.Getting Interface Device Parameters
 //=================================================================================================
 void getParamDevice(RT_HW_ADS1115_DEV &id){
-id.custom=id.dvI.custom; id.codeErr=id.dvI.codeErr; id.status=id.dvI.status; id.link=id.dvI.link; id.bf8=id.dvI.bf8; return;}
+  id.custom=id.dvI.custom; id.codeErr=id.dvI.codeErr; id.status=id.dvI.status; id.link=id.dvI.link; id.bf8=id.dvI.bf8;};
 //=================================================================================================
 //									7.3.Init Device.
 //=================================================================================================
 void xxxInitDevice(RT_HW_ADS1115_DEV &id){
-RT_HW_Base.i2cInitDevice(id.dvI); 				getParamDevice(id); return;}		
+  RT_HW_Base.i2cInitDevice(id.dvI); 		   	getParamDevice(id);};		
 //=================================================================================================
 //									7.2.Find address Device.
 //=================================================================================================
 void xxxFindAdr(RT_HW_ADS1115_DEV &id){
-RT_HW_Base.i2cFindAdr(id.dvI); 					getParamDevice(id); return;}	
+  RT_HW_Base.i2cFindAdr(id.dvI); 				getParamDevice(id);};	
 //=================================================================================================
 //									7.4.Wtite byte to register.
 //=================================================================================================
 void xxxWriteArr(RT_HW_ADS1115_DEV &id, uint8_t qnt){	
-RT_HW_Base.i2cWriteArr(id.dvI,id.arr,qnt); 	 	getParamDevice(id); return;}
+  RT_HW_Base.i2cWriteArr(id.dvI,id.arr,qnt); 	getParamDevice(id);};
 //=================================================================================================
 //									7.6.Read bytes from register
 //=================================================================================================
 void xxxREADArr(RT_HW_ADS1115_DEV &id, uint8_t reg, uint8_t qnt){	
 //-------------------------------------------------------------------------------------------------
-RT_HW_Base.i2cREADArr(id.dvI,reg,id.arr,qnt);	getParamDevice(id); return;}
+  RT_HW_Base.i2cREADArr(id.dvI,reg,id.arr,qnt);	getParamDevice(id);};
 //=================================================================================================
 //									7.11.Get bytes.
 //=================================================================================================
 void xxxReadArr(RT_HW_ADS1115_DEV &id, uint8_t qnt){	
-RT_HW_Base.i2cReadArr(id.dvI,id.arr,qnt); 		getParamDevice(id); return;};
+  RT_HW_Base.i2cReadArr(id.dvI,id.arr,qnt); 	getParamDevice(id);};
 //=================================================================================================
 };	//++++END class RT_HW_RT_HW_ADS1115====================================================================
 extern RT_HW_ADS1115 	RT_HW_ads1115; 						//--Create an object RT_HW_ADS1115;

@@ -54,51 +54,58 @@ if(id.msLenHead==255){id.xSrc=0; if(!(getCharLcdPGM(head,id.xSrc)=='~')){	//--He
 	                 id.msLenHead=getLenPGM(head,id.len);} else{id.msLenHead=0;}} 
 if(id.suff=='~')     {id.msLenSuff=0;} else{id.msLenSuff=1;}				//--Suffix Sizing;
 //-------------------------------Расчет длины поля переменной--------------------------------------
-id.msLenVar=0;
-if(id.formatVar=='I'){id.msLenVar=String(id.agoVar).length();}
-if(id.formatVar=='U'){if(id.agoVar>=0){id.msLenVar=String(id.agoVar).length();} else{id.msLenVar=String((uint32_t)(-id.agoVar)).length();}}
-if(id.formatVar=='0'){id.msLenVar=String(id.agoVar).length();}
-if(id.formatVar=='1'){id.msLenVar=String((float)id.agoVar/10.0,1).length();}
-if(id.formatVar=='2'){id.msLenVar=String((float)id.agoVar/100.0,2).length();}
-if(id.formatVar=='3'){id.msLenVar=String((float)id.agoVar/1000.0,3).length();}
-if(id.formatVar=='4'){id.msLenVar=String((float)id.agoVar/10000.0,4).length();}
-if(id.formatVar=='T'){id.msLenVar=2;}
-if(id.formatVar=='H'){if(id.modeVar=='B'){id.msLenVar=2;} if(id.modeVar=='W'){id.msLenVar=4;} if(id.modeVar=='L'){id.msLenVar=8;}}
-if(id.formatVar=='#'){if(id.modeVar=='B'){id.msLenVar=8;} if(id.modeVar=='W'){id.msLenVar=16;}}
-if(id.formatVar=='*'){if(id.modeVar=='B'){id.msLenVar=8;} if(id.modeVar=='W'){id.msLenVar=16;}}
-if(id.formatVar=='='){id.msLenVar=4;}
-if(id.formatVar=='-'){id.msLenVar=4;}
+  id.msLenVar=0;
+  if(id.formatVar=='I'){id.msLenVar=String(id.agoVar).length();}
+  if(id.formatVar=='U'){if(id.agoVar>=0){id.msLenVar=String(id.agoVar).length();} else{id.msLenVar=String((uint32_t)(-id.agoVar)).length();}}
+  if(id.formatVar=='0'){id.msLenVar=String(id.agoVar).length();}
+  if(id.formatVar=='1'){id.msLenVar=String((float)id.agoVar/10.0,1).length();}
+  if(id.formatVar=='2'){id.msLenVar=String((float)id.agoVar/100.0,2).length();}
+  if(id.formatVar=='3'){id.msLenVar=String((float)id.agoVar/1000.0,3).length();}
+  if(id.formatVar=='4'){id.msLenVar=String((float)id.agoVar/10000.0,4).length();}
+  if(id.formatVar=='T'){id.msLenVar=2;}
+  if(id.formatVar=='H'){if(id.modeVar=='B'){id.msLenVar=2;} if(id.modeVar=='W'){id.msLenVar=4;} if(id.modeVar=='L'){id.msLenVar=8;}}
+  if(id.formatVar=='#'){if(id.modeVar=='B'){id.msLenVar=8;} if(id.modeVar=='W'){id.msLenVar=16;}}
+  if(id.formatVar=='*'){if(id.modeVar=='B'){id.msLenVar=8;} if(id.modeVar=='W'){id.msLenVar=16;}}
+  if(id.formatVar=='='){id.msLenVar=4;}
+  if(id.formatVar=='-'){id.msLenVar=4;}
+#if defined(RT_HW_LINK_ETH)
+  if(id.formatVar=='L'){id.msLenVar=RT_HW_Base.ethNumIpToString(id.agoVar).length();}
+#endif
 //if(id.formatVar=='X'){id.msLenVar=(id.agoVar&0xFFFF)*(id.len-id.msLenSuff)/100;} 		
 //---------------------------------------------------------------------------------------------------
-   if(( id.msLenHead+id.msLenVar+id.msLenSuff)> id.len){id.msLenSuff=0;}	                        //--Suffix     length normalization;
-do{if(((id.msLenHead+id.msLenVar)<=id.len) ||(id.msLenHead==0)){break;} id.msLenHead--;} while(1);	//--Heading    length normalization;		   
-do{if(((id.msLenVar)<=id.len) ||(id.msLenVar==0))              {break;} id.msLenVar--;}  while(1);	//--Variabling length normalization;
+     if(( id.msLenHead+id.msLenVar+id.msLenSuff)> id.len){id.msLenSuff=0;}	                        //--Suffix     length normalization;
+  do{if(((id.msLenHead+id.msLenVar)<=id.len) ||(id.msLenHead==0)){break;} id.msLenHead--;} while(1);	//--Heading    length normalization;		   
+  do{if(((id.msLenVar)<=id.len) ||(id.msLenVar==0))              {break;} id.msLenVar--;}  while(1);	//--Variabling length normalization;
 //----------------------------------Расчет Begin и End заполнителей----------------------------------
-id.msLenBegin=getLenBegin(id);	 id.msLenEnd=getLenEnd(id); 		
+  id.msLenBegin=getLenBegin(id);	 id.msLenEnd=getLenEnd(id); 		
 //---------------------------------------------------------------------------------------------------
-if(id.msLenBegin>0){          for(id.idx=0; id.idx<id.msLenBegin; id.idx++){arrWrite(id.num,' ');}}	//--Write to array blank before Head;  																																		//--Очистка индекса для getCharLcdPGM();
-if(id.msLenHead>0) {id.xSrc=0;for(id.idx=0; id.idx<id.msLenHead;  id.idx++){arrWrite(id.num,getCharLcdPGM(head,id.xSrc));}} //--Write to array Head; 
+  if(id.msLenBegin>0){          for(id.idx=0; id.idx<id.msLenBegin; id.idx++){arrWrite(id.num,' ');}}	//--Write to array blank before Head;  																																		//--Очистка индекса для getCharLcdPGM();
+  if(id.msLenHead>0) {id.xSrc=0;for(id.idx=0; id.idx<id.msLenHead;  id.idx++){arrWrite(id.num,getCharLcdPGM(head,id.xSrc));}} //--Write to array Head; 
 //------------------------------------------Запись переменной----------------------------------------
-if(id.msLenVar>0){
-String bs;
-if(id.formatVar=='I'){bs=String(id.agoVar);}
-if(id.formatVar=='U'){if(id.agoVar>=0){bs=String(id.agoVar);} else{bs=String(-id.agoVar);}}
-if(id.formatVar=='0'){bs=String(id.agoVar);}
-if(id.formatVar=='1'){bs=String((float)id.agoVar/10.0,1);}
-if(id.formatVar=='2'){bs=String((float)id.agoVar/100.0,2);}
-if(id.formatVar=='3'){bs=String((float)id.agoVar/1000.0,3);}
-if(id.formatVar=='4'){bs=String((float)id.agoVar/10000.0,4);}
-if(id.formatVar=='T'){bs=String(id.agoVar); if(id.agoVar<=9) {bs="0"+bs;}}
-if(id.formatVar=='H'){if(id.modeVar=='B'){bs=String((id.agoVar&0xFF),      HEX); bs.toUpperCase(); uint8_t bl=bs.length(); if(bl==1){bs="0"+bs;}} 
-                      if(id.modeVar=='W'){bs=String((id.agoVar&0xFFFF),    HEX); bs.toUpperCase(); uint8_t bl=bs.length(); if(bl==1){bs="000"+bs;} if(bl==2){bs="00"+bs;} if(bl==3){bs=String("0")+bs;}}
-                      if(id.modeVar=='L'){bs=String((id.agoVar&0xFFFFFFFF),HEX); bs.toUpperCase(); uint8_t bl=bs.length(); if(bl<8){for(id.idx=0; id.idx<(8-bl);id.idx++){bs=String("0")+bs;}}}} 
-if(id.formatVar=='#'){if(id.modeVar=='B'){uint8_t  buff=id.agoVar&0xFF;   for(id.idx=0; id.idx<8;  id.idx++){bs=bs+getSignBit(buff,7-id.idx);}}
-                      if(id.modeVar=='W'){uint16_t buff=id.agoVar&0xFFFF; for(id.idx=0; id.idx<16; id.idx++){bs=bs+getSignBit(buff,15-id.idx);}}}
-if(id.formatVar=='*'){if(id.modeVar=='B'){uint8_t  buff=id.agoVar&0xFF;   for(id.idx=0; id.idx<8;  id.idx++){bs=bs+getSignBit(buff,id.idx);}}
-                      if(id.modeVar=='W'){uint16_t buff=id.agoVar&0xFFFF; for(id.idx=0; id.idx<16; id.idx++){bs=bs+getSignBit(buff,id.idx);}}}
-if(id.formatVar=='='){                    uint8_t  buff=id.agoVar&0xF;    for(id.idx=0; id.idx<4;  id.idx++){bs=bs+getSignBit(buff,4-id.idx);}}
-if(id.formatVar=='-'){                    uint8_t  buff=id.agoVar&0xF;    for(id.idx=0; id.idx<4;  id.idx++){bs=bs+getSignBit(buff,id.idx);}}											 
-for(id.idx=0; id.idx<id.msLenVar; id.idx++){arrWrite(id.num,bs.charAt(id.idx));}
+  if(id.msLenVar>0){
+  String bs;
+  if(id.formatVar=='I'){bs=String(id.agoVar);}
+  if(id.formatVar=='U'){if(id.agoVar>=0){bs=String(id.agoVar);} else{bs=String(-id.agoVar);}}
+  if(id.formatVar=='0'){bs=String(id.agoVar);}
+  if(id.formatVar=='1'){bs=String((float)id.agoVar/10.0,1);}
+  if(id.formatVar=='2'){bs=String((float)id.agoVar/100.0,2);}
+  if(id.formatVar=='3'){bs=String((float)id.agoVar/1000.0,3);}
+  if(id.formatVar=='4'){bs=String((float)id.agoVar/10000.0,4);}
+  if(id.formatVar=='T'){bs=String(id.agoVar); if(id.agoVar<=9) {bs="0"+bs;}}
+  if(id.formatVar=='H'){if(id.modeVar=='B'){bs=String((id.agoVar&0xFF),      HEX); bs.toUpperCase(); uint8_t bl=bs.length(); if(bl==1){bs="0"+bs;}} 
+                        if(id.modeVar=='W'){bs=String((id.agoVar&0xFFFF),    HEX); bs.toUpperCase(); uint8_t bl=bs.length(); if(bl==1){bs="000"+bs;} if(bl==2){bs="00"+bs;} if(bl==3){bs=String("0")+bs;}}
+                        if(id.modeVar=='L'){bs=String((id.agoVar&0xFFFFFFFF),HEX); bs.toUpperCase(); uint8_t bl=bs.length(); if(bl<8){for(id.idx=0; id.idx<(8-bl);id.idx++){bs=String("0")+bs;}}}} 
+  if(id.formatVar=='#'){if(id.modeVar=='B'){uint8_t  buff=id.agoVar&0xFF;   for(id.idx=0; id.idx<8;  id.idx++){bs=bs+getSignBit(buff,7-id.idx);}}
+                        if(id.modeVar=='W'){uint16_t buff=id.agoVar&0xFFFF; for(id.idx=0; id.idx<16; id.idx++){bs=bs+getSignBit(buff,15-id.idx);}}}
+  if(id.formatVar=='*'){if(id.modeVar=='B'){uint8_t  buff=id.agoVar&0xFF;   for(id.idx=0; id.idx<8;  id.idx++){bs=bs+getSignBit(buff,id.idx);}}
+                        if(id.modeVar=='W'){uint16_t buff=id.agoVar&0xFFFF; for(id.idx=0; id.idx<16; id.idx++){bs=bs+getSignBit(buff,id.idx);}}}
+  if(id.formatVar=='='){                    uint8_t  buff=id.agoVar&0xF;    for(id.idx=0; id.idx<4;  id.idx++){bs=bs+getSignBit(buff,4-id.idx);}}
+  if(id.formatVar=='-'){                    uint8_t  buff=id.agoVar&0xF;    for(id.idx=0; id.idx<4;  id.idx++){bs=bs+getSignBit(buff,id.idx);}}											 
+#if defined(RT_HW_LINK_ETH)
+  if(id.formatVar=='L'){bs=RT_HW_Base.ethNumIpToString(id.agoVar);}
+#endif
+  for(id.idx=0; id.idx<id.msLenVar; id.idx++){arrWrite(id.num,bs.charAt(id.idx));}
+
 }
 //----------------------------------Запись суффикса и End заполнителей-----------------------------
 if(id.msLenSuff>0) {arrWrite(id.num,id.suff);}															//--Write to array suffix; 

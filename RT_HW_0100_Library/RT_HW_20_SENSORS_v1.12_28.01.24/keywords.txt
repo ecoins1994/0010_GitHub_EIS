@@ -1,0 +1,31 @@
+#######################################
+#			RT_HW_SENSORS
+#   Syntax Coloring Map 
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1) 
+#######################################
+RT_HW_BASE				    KEYWORD1
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+RT_HW_BH1750				KEYWORD2
+RT_HW_AHTXX					KEYWORD2
+RT_HW_HTU21					KEYWORD2
+RT_HW_SHT3X					KEYWORD2
+RT_HW_BMP180				KEYWORD2
+RT_HW_BME280				KEYWORD2
+RT_HW_BME280				KEYWORD2
+RT_HW_DHT22					KEYWORD2
+RT_HW_STRUCT_DS1820_ID		KEYWORD2
+RT_HW_STRUCT_MAX6675_ID		KEYWORD2
+RT_HW_STRUCT_SR04_ID		KEYWORD2
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
